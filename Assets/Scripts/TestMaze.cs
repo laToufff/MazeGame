@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class MazeGenerator : MonoBehaviour
+public class TestMaze : MonoBehaviour
 {
     public Tilemap tilemap;
+    public MazeGenerator mazeGenerator;
     public List<MazeTile> tiles;
     public int startPosX;
     public int startPosY;
     MazeCell[,] chunk = new MazeCell[6, 4];
+    System.Random random;
+    List<MazeCell> stack;
+    MazeCell current;
+    public Tile backTile;
+    public Tilemap groundTM;
 
     // Start is called before the first frame update
     void Start()
     {
-        var random = new System.Random();
+        tiles = mazeGenerator.tiles;
+        random = new System.Random();
         for (int x=0;x<chunk.GetLength(0);x++){
             for (int y=0;y<chunk.GetLength(1);y++){
                 MazeCell cell = new MazeCell();
@@ -23,12 +30,15 @@ public class MazeGenerator : MonoBehaviour
                 chunk[x,y] = cell;
             }
         }
-        MazeCell current = chunk[startPosX,startPosY];
+        current = chunk[startPosX,startPosY];
         current.visited = true;
-        var stack = new List<MazeCell>();
-        stack.Add(current); 
-        for (int i = 0; i < 100;i++) {
-            var neighbors = new List<int[]>(); 
+        stack = new List<MazeCell>();
+        stack.Add(current);
+        //InvokeRepeating("MazeFrame", 1.0f, 0.4f);
+    }
+
+    void MazeFrame(){
+        var neighbors = new List<int[]>(); 
             if (current.x > 0){
                 MazeCell westCell = chunk[current.x-1, current.y];
                 if (!westCell.visited && !stack.Contains(westCell)){
@@ -55,13 +65,12 @@ public class MazeGenerator : MonoBehaviour
             }
             if (neighbors.Count == 0){
                 DrawMazeTile(current);
+                Debug.Log(current.x.ToString()+":"+current.y.ToString()+" -> "+current.walls.ToString());
                 current = stack[stack.Count-1];
                 current.visited = true;
+                groundTM.SetTile(new Vector3Int(current.x, current.y, 0), backTile);
                 stack.RemoveAt(stack.Count-1);
-                if(stack.Count == 0){
-                    break;
-                }
-                continue;
+                return;
             }
             var posDiff = neighbors[random.Next(neighbors.Count)];
             int xd = posDiff[0];
@@ -87,46 +96,12 @@ public class MazeGenerator : MonoBehaviour
             Debug.Log(current.x.ToString()+":"+current.y.ToString()+" -> "+current.walls.ToString());
             stack.Add(chosenCell);
             current = chosenCell;
-        }
     }
-
     void DrawMazeTile(MazeCell cell){
         foreach (MazeTile t in tiles){
                 if (cell.walls == t.GetBinaryWalls()){
                     tilemap.SetTile(new Vector3Int(cell.x, cell.y, 0), t.sprite);
                 }
             }
-    }
-}
-
-public class MazeCell
-{
-    public bool visited = false;
-    public int walls = 0b0000;
-    public int x;
-    public int y;
-}
-
-[System.Serializable]
-public class MazeTile
-{
-    public Tile sprite;
-    public bool northOpened = false;
-    public bool westOpened = false;
-    public bool southOpened = false;
-    public bool eastOpened = false;
-
-    public int GetBinaryWalls(){
-        int bin = 0b0000;
-        if (northOpened){
-            bin += 0b1000;
-        } if (westOpened){
-            bin += 0b0100;
-        } if (southOpened){
-            bin += 0b0010;
-        } if (eastOpened){
-            bin += 0b0001;
-        }
-        return bin;
     }
 }
