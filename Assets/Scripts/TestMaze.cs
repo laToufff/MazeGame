@@ -10,7 +10,7 @@ public class TestMaze : MonoBehaviour
     public List<MazeTile> tiles;
     public int startPosX;
     public int startPosY;
-    MazeCell[,] chunk = new MazeCell[6, 4];
+    MazeCell[,] chunk = new MazeCell[12, 8];
     System.Random random;
     List<MazeCell> stack;
     MazeCell current;
@@ -34,7 +34,7 @@ public class TestMaze : MonoBehaviour
         current.visited = true;
         stack = new List<MazeCell>();
         stack.Add(current);
-        //InvokeRepeating("MazeFrame", 1.0f, 0.4f);
+        //InvokeRepeating("MazeFrame", 1.0f, 0.1f);
     }
 
     void MazeFrame(){

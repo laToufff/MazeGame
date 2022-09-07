@@ -13,6 +13,10 @@ public class FloorGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Generate();
+    }
+
+    public void Generate(){
         System.Random random = new System.Random();
         for(int x = startPos.x; x <= endPos.x; x++){
             for(int y = startPos.y; y <= endPos.y; y++){
