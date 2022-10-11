@@ -24,9 +24,7 @@ public class TestMaze : MonoBehaviour
         random = new System.Random();
         for (int x=0;x<chunk.GetLength(0);x++){
             for (int y=0;y<chunk.GetLength(1);y++){
-                MazeCell cell = new MazeCell();
-                cell.x = x;
-                cell.y = y;
+                MazeCell cell = new MazeCell(x,y);
                 chunk[x,y] = cell;
             }
         }
@@ -65,7 +63,7 @@ public class TestMaze : MonoBehaviour
             }
             if (neighbors.Count == 0){
                 DrawMazeTile(current);
-                Debug.Log(current.x.ToString()+":"+current.y.ToString()+" -> "+current.walls.ToString());
+                Debug.Log(current.x.ToString()+":"+current.y.ToString()+" -> "+current.openings.ToString());
                 current = stack[stack.Count-1];
                 current.visited = true;
                 groundTM.SetTile(new Vector3Int(current.x, current.y, 0), backTile);
@@ -77,29 +75,29 @@ public class TestMaze : MonoBehaviour
             int yd = posDiff[1];
             MazeCell chosenCell = chunk[current.x+xd,current.y+yd];
             if (xd == 1){
-                current.walls += 0b0001;
-                chosenCell.walls += 0b0100;
+                current.openings += 0b0001;
+                chosenCell.openings += 0b0100;
             }
             else if (xd == -1){
-                current.walls += 0b0100;
-                chosenCell.walls += 0b0001;
+                current.openings += 0b0100;
+                chosenCell.openings += 0b0001;
             }
             if (yd == 1){
-                current.walls += 0b1000;
-                chosenCell.walls += 0b0010;
+                current.openings += 0b1000;
+                chosenCell.openings += 0b0010;
             }
             else if (yd == -1){
-                current.walls += 0b0010;
-                chosenCell.walls += 0b1000;
+                current.openings += 0b0010;
+                chosenCell.openings += 0b1000;
             }
             DrawMazeTile(current);
-            Debug.Log(current.x.ToString()+":"+current.y.ToString()+" -> "+current.walls.ToString());
+            Debug.Log(current.x.ToString()+":"+current.y.ToString()+" -> "+current.openings.ToString());
             stack.Add(chosenCell);
             current = chosenCell;
     }
     void DrawMazeTile(MazeCell cell){
         foreach (MazeTile t in tiles){
-                if (cell.walls == t.GetBinaryWalls()){
+                if (cell.openings == t.GetBinaryOpenings()){
                     tilemap.SetTile(new Vector3Int(cell.x, cell.y, 0), t.sprite);
                 }
             }
