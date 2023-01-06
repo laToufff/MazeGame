@@ -12,7 +12,7 @@ public class MazeGeneratorEditor : Editor
 
         MazeGenerator mazeGenerator = (MazeGenerator)target;
         if (GUILayout.Button("Generate Maze")){
-            mazeGenerator.CreateMaze(true);
+            mazeGenerator.GenerateChunks(true);
         }
     }
 }

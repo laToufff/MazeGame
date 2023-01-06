@@ -145,16 +145,6 @@ public class Chunk
                 int x = cell.x + roomPos.x;
                 int y = cell.y + roomPos.y;
                 grid[x,y] = cell;
-                /*if (cell.x == 0){
-                    grid[x-1,y].openings &= ~Cardinal.EAST;
-                } else if (cell.x == w-1){
-                    grid[x+1,y].openings &= ~Cardinal.WEST;
-                }
-                if (cell.y == 0){
-                    grid[x,y-1].openings &= ~Cardinal.NORTH;
-                } else if (cell.y == h-1){
-                    grid[x,y+1].openings &= ~Cardinal.SOUTH;
-                }*/
                 if (cell.x == 0){
                     if (cell.y == 0){
                         grid[x-1,y].openings &= ~Cardinal.EAST;

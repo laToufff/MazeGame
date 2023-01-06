@@ -159,7 +159,7 @@ TextureImporter:
       213: -2327852747314698072
     second: maze_tiles_31
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -179,6 +179,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -188,8 +190,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -210,10 +212,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -229,6 +235,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1460,6 +1478,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      maze_tiles_18: 9151569185704923370
+      maze_tiles_20: -5488944086553132685
+      maze_tiles_5: 8550393069781474037
+      maze_tiles_24: -6161734380235858734
+      maze_tiles_19: 6462653402522728188
+      maze_tiles_25: -8014225515187065101
+      maze_tiles_26: 2228301645761557105
+      maze_tiles_12: 2125533837493459708
+      maze_tiles_22: -6917528985978417130
+      maze_tiles_28: 8198155431255830099
+      maze_tiles_23: 8583379315784868187
+      maze_tiles_4: -5851051778113710526
+      maze_tiles_15: 4799538733660771139
+      maze_tiles_30: -809352529518781013
+      maze_tiles_8: -7526839325858514372
+      maze_tiles_6: -398002682517584140
+      maze_tiles_10: -1814729429617337576
+      maze_tiles_14: 8775615390768633771
+      maze_tiles_27: -6105946074568710933
+      maze_tiles_11: 3458084480589128671
+      maze_tiles_21: 858497819573343908
+      maze_tiles_3: 958364372687344840
+      maze_tiles_2: -4894330165305241396
+      maze_tiles_0: -1986603261699091492
+      maze_tiles_9: 2578364788156889815
+      maze_tiles_17: 4377272293844866977
+      maze_tiles_7: 6340884490654373702
+      maze_tiles_1: 4462657309099507115
+      maze_tiles_29: 8552113419694137751
+      maze_tiles_16: 7890969778404444511
+      maze_tiles_31: -2327852747314698072
+      maze_tiles_13: 2765756389216924576
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

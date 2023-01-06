@@ -7,32 +7,32 @@ public class MazeGenerator : MonoBehaviour
 {
     public Tilemap tilemap;
     public Tilemap floorTilemap;
+    public PathFindingGraphUpdate pathFindingGraphUpdate;
     public List<MazeTile> tiles;
     public List<Tile> floorTiles;
     public GameObject player;
+    public Vector2Int chunkPos;
     public int chunkWidth;
     public int chunkHeight;
     public Dictionary<Vector2Int,Chunk> chunks = new Dictionary<Vector2Int,Chunk>();
-    
 
     void Start() {
-        CreateMaze();
+        GenerateChunks();
+        pathFindingGraphUpdate.UpdateGraph(Vector3.zero);
     }
+
 
     private void Update() {
-        CreateMaze();
-    }
-
-    public void CreateMaze(bool reset = false) {
         Vector3 pos = player.transform.position/3;
-        Vector2Int chunkPos = new Vector2Int(Mathf.FloorToInt(pos.x/chunkWidth),Mathf.FloorToInt(pos.y/chunkHeight));
-        GenerateChunks(chunkPos, reset);
+        chunkPos = new Vector2Int(Mathf.FloorToInt(pos.x/chunkWidth),Mathf.FloorToInt(pos.y/chunkHeight));
+        GenerateChunks();
+        pathFindingGraphUpdate.UpdateGraph(new Vector3(chunkPos.x * 3 * chunkHeight + 1.5f * chunkHeight, chunkPos.y * 3 * chunkWidth + 1.5f * chunkWidth, 0));
     }
 
-    public void GenerateChunks(Vector2Int coords, bool reset=false) {
+    public void GenerateChunks(bool reset=false) {
         for (int x = -1; x < 2; x++){
             for (int y = -1; y < 2; y++){
-                Vector2Int pos = new Vector2Int(coords.x+x,coords.y+y);
+                Vector2Int pos = new Vector2Int(chunkPos.x+x,chunkPos.y+y);
                 if (chunks.ContainsKey(pos) && !reset){
                     continue;
                 }
@@ -40,12 +40,6 @@ public class MazeGenerator : MonoBehaviour
                 chunk.Draw();
                 chunks[pos] = chunk;
             }
-        }
-    }
-
-    public void UpdateMaze(){
-        foreach (var c in chunks.Values){
-            c.Draw();
         }
     }
     
