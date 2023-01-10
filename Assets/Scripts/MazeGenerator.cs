@@ -18,7 +18,6 @@ public class MazeGenerator : MonoBehaviour
 
     void Start() {
         GenerateChunks();
-        pathFindingGraphUpdate.UpdateGraph(Vector3.zero);
     }
 
 

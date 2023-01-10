@@ -6,10 +6,11 @@ using Pathfinding;
 public class PathFindingGraphUpdate : MonoBehaviour
 {
     private GridGraph gridGraph;
-    private Vector3 position = new Vector3(0, 0, 1);
+    private Vector3 position;
 
     private void Start() {
         gridGraph = AstarPath.active.data.gridGraph;
+        //InitializeGraph();
     }
 
     public void UpdateGraph(Vector3 pos) {
